@@ -182,18 +182,24 @@ def extract_features(img: np.ndarray) -> np.ndarray:
 
 # ── Routes ────────────────────────────────────────────────────────────────────
 
-@app.route("/")
-def index():
-    return render_template("index.html")
-
-@app.route("/lsb")
-def lsb():
-    return render_template("lsb.html")
 
 @app.route("/test")
 def test():
     return render_template("test.html")
 
+from flask import redirect
+
+@app.route("/")
+def index():
+    return redirect("https://ad9190.github.io/Steganography_Final/")
+
+@app.route("/lsb")
+def lsb():
+    return redirect("https://ad9190.github.io/Steganography_Final/lsb.html")
+
+@app.route("/health")
+def health():
+    return "ok", 200
 
 @app.route("/predict", methods=["POST"])
 def predict():
