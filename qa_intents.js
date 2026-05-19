@@ -1,0 +1,173 @@
+window.QA_INTENTS = {
+  "intents": [
+    {
+      "tag": "greeting",
+      "patterns": ["hi", "hello", "hey", "yo", "good morning", "good evening", "good afternoon", "sup"],
+      "responses": [
+        "Hi! Ask me about steganography, LSB, capacity, or detection.",
+        "Hello! I can answer questions about LSB steganography and related topics."
+      ]
+    },
+    {
+      "tag": "thanks",
+      "patterns": ["thanks", "thank you", "thx", "appreciate it", "nice"],
+      "responses": [
+        "You're welcome! Ask another question anytime.",
+        "Glad to help. Want to know about LSB, detection, or history?"
+      ]
+    },
+    {
+      "tag": "goodbye",
+      "patterns": ["bye", "goodbye", "see you", "later"],
+      "responses": [
+        "Goodbye! Come back if you want more steganography details.",
+        "See you! I will be here if you have more LSB questions."
+      ]
+    },
+    {
+      "tag": "help",
+      "patterns": ["help", "what can you do", "what can you answer", "examples", "menu"],
+      "responses": [
+        "I can answer about steganography, LSB steps, capacity, detection, and history. Try: 'LSB vs DCT'.",
+        "Ask about LSB, multi-bit planes, formats, detection methods, or steganography history."
+      ]
+    },
+    {
+      "tag": "steganography_definition",
+      "patterns": ["what is steganography", "define steganography", "steganography meaning", "steganography definition"],
+      "responses": [
+        {
+          "text": "Steganography hides information inside another medium (images, audio, or text) so the message itself is not obvious.",
+          "links": [
+            { "label": "History of Steganography", "url": "history.html" }
+          ]
+        }
+      ]
+    },
+    {
+      "tag": "lsb_definition",
+      "patterns": ["what is lsb", "what is lsb steganography", "lsb steganography", "lsb method", "least significant bit"],
+      "responses": [
+        {
+          "text": "LSB steganography replaces the least significant bits of pixel values with message bits, producing minimal visual change.",
+          "links": [
+            { "label": "Read LSB Steganography", "url": "lsb.html" }
+          ]
+        }
+      ]
+    },
+    {
+      "tag": "how_done",
+      "patterns": ["how is it done", "how is it performed", "how does it work", "how to embed", "how do you embed", "embedding process"],
+      "responses": [
+        {
+          "text": "Here is a quick guided path to understand the process:",
+          "bullets": [
+            "Start with the LSB overview",
+            "Watch the step-by-step embedding simulation",
+            "Explore the historical evolution"
+          ],
+          "links": [
+            { "label": "LSB Overview", "url": "lsb.html" },
+            { "label": "Embedding Simulation", "url": "simulation.html" },
+            { "label": "History", "url": "history.html" }
+          ]
+        }
+      ]
+    },
+    {
+      "tag": "multibit_lsb",
+      "patterns": ["multi-bit lsb", "multiple bit planes", "multi plane lsb", "bit planes"],
+      "responses": [
+        "Multi-bit LSB embeds across several bit planes per pixel to increase capacity, trading off some imperceptibility.",
+        "Multi-plane LSB fills complete bit planes sequentially, then uses remaining bits for any leftover payload."
+      ]
+    },
+    {
+      "tag": "lsb_steps",
+      "patterns": ["lsb steps", "how to do lsb", "lsb algorithm", "embed using lsb"],
+      "responses": [
+        {
+          "text": "Typical LSB steps: convert message to bits, choose a cover image, replace target bit planes, add a delimiter, and save as a lossless image.",
+          "links": [
+            { "label": "See Simulation", "url": "simulation.html" }
+          ]
+        }
+      ]
+    },
+    {
+      "tag": "advantages",
+      "patterns": ["advantages of lsb", "pros of lsb", "benefits of steganography", "why use lsb"],
+      "responses": [
+        "Advantages include simplicity, high capacity, and minimal visual distortion in lossless images.",
+        "LSB is fast and easy to implement, with good payload capacity for many images."
+      ]
+    },
+    {
+      "tag": "limitations",
+      "patterns": ["limitations of lsb", "disadvantages of lsb", "lsb weaknesses", "steganalysis"],
+      "responses": [
+        "LSB can be detected by statistical analysis and is fragile against compression and image processing.",
+        "It is vulnerable to steganalysis and lossy formats like JPEG can destroy hidden data."
+      ]
+    },
+    {
+      "tag": "lsb_vs_dct",
+      "patterns": ["lsb vs dct", "compare lsb and dct", "lsb vs frequency domain"],
+      "responses": [
+        "LSB is spatial-domain and simpler but less robust; DCT embeds in frequency coefficients and is more resilient to compression.",
+        "DCT steganography trades simplicity for robustness, while LSB is easier but easier to detect."
+      ]
+    },
+    {
+      "tag": "detection",
+      "patterns": ["detect lsb", "lsb detection", "how to detect steganography", "how is it detected", "steganalysis methods"],
+      "responses": [
+        {
+          "text": "Common detection methods:",
+          "bullets": [
+            "Histogram and pair analysis",
+            "Chi-square tests",
+            "RS analysis",
+            "Feature-based machine learning"
+          ],
+          "links": [
+            { "label": "Try Detection Model", "url": "http://127.0.0.1:5000/test" }
+          ]
+        }
+      ]
+    },
+    {
+      "tag": "history",
+      "patterns": ["history of steganography", "steganography history", "origin of steganography"],
+      "responses": [
+        {
+          "text": "Steganography dates back to ancient Greece, later formalized during the Renaissance, and transformed by digital media in the 20th century.",
+          "links": [
+            { "label": "Read History", "url": "history.html" }
+          ]
+        }
+      ]
+    },
+    {
+      "tag": "image_formats",
+      "patterns": ["best image format", "png or bmp", "lossless format", "which format for lsb"],
+      "responses": [
+        "Use lossless formats like PNG or BMP for LSB to avoid destroying hidden bits.",
+        "Lossless formats preserve exact pixel values, which is essential for LSB embedding."
+      ]
+    },
+    {
+      "tag": "capacity",
+      "patterns": ["capacity", "payload", "how much data", "bits per pixel"],
+      "responses": [
+        "Capacity depends on image size and number of bit planes. With $k$ planes, capacity is $k$ bits per pixel.",
+        "Payload is roughly $\text{pixels} \times \text{bit planes}$, assuming one channel and no metadata overhead."
+      ]
+    }
+  ],
+  "fallback": [
+    "I can help with steganography, LSB methods, capacity, detection, and history. Try asking about LSB steps or LSB vs DCT.",
+    "Not sure yet. Ask about LSB, multi-bit planes, detection methods, or the history of steganography."
+  ]
+};

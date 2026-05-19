@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Interactive Multi-bit Plane LSB Steganography Simulation">
+  <title>Multi-bit LSB Simulation - Interactive Demo</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="styles.css" rel="stylesheet">
+  <style>
+    .simulation-hero {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 100px 0 60px;
+      margin-top: 70px;
+    }
+
+    .simulation-container {
+      padding: 40px 0;
+      color: #dde6f8;
+    }
+
+    .control-panel {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid #2b3650;
+      border-radius: 12px;
+      padding: 25px;
+      margin-bottom: 30px;
+    }
+
+    .pixel-visualizer {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 15px;
+      margin: 30px 0;
+    }
+
+    .pixel-box {
+      background: #141d2d;
+      border: 2px solid #2b3650;
+      border-radius: 8px;
+      padding: 15px;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .pixel-box:hover {
+      border-color: #667eea;
+      box-shadow: 0 0 20px rgba(102, 126, 234, 0.3);
+    }
+
+    .pixel-decimal {
+      font-size: 18px;
+      font-weight: bold;
+      color: #667eea;
+      margin-bottom: 10px;
+    }
+
+    .bit-plane {
+      display: flex;
+      justify-content: center;
+      gap: 3px;
+      margin: 8px 0;
+      font-family: 'Courier New', monospace;
+    }
+
+    .bit {
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: bold;
+      transition: all 0.3s ease;
+    }
+
+    .bit-0 {
+      background: #1e3a5f;
+      color: #6b8cce;
+      border: 1px solid #2b5090;
+    }
+
+    .bit-1 {
+      background: #5f1e2e;
+      color: #ce6b8c;
+      border: 1px solid #902b55;
+    }
+
+    .bit.modified {
+      animation: pulse 0.6s ease;
+      box-shadow: 0 0 10px rgba(102, 126, 234, 0.8);
+    }
+
+    .bit.highlight {
+      animation: highlight 0.8s ease;
+      box-shadow: 0 0 15px rgba(40, 167, 69, 0.8);
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.2);
+      }
+    }
+
+    @keyframes highlight {
+      0%, 100% {
+        background: #28a745;
+      }
+      50% {
+        background: #20c997;
+      }
+    }
+
+    .info-box {
+      background: rgba(102, 126, 234, 0.1);
+      border-left: 4px solid #667eea;
+      border: 1px solid #2b3650;
+      padding: 15px;
+      border-radius: 8px;
+      margin: 20px 0;
+    }
+
+    .step-indicator {
+      display: flex;
+      gap: 10px;
+      margin: 20px 0;
+      flex-wrap: wrap;
+    }
+
+    .step {
+      padding: 8px 16px;
+      background: #141d2d;
+      border: 1px solid #2b3650;
+      border-radius: 20px;
+      font-size: 13px;
+      transition: all 0.3s ease;
+    }
+
+    .step.active {
+      background: #667eea;
+      border-color: #667eea;
+      color: white;
+    }
+
+    .message-input {
+      background: #0b1220;
+      border: 1px solid #2b3650;
+      color: #dce7ff;
+      border-radius: 8px;
+      padding: 12px;
+      margin: 10px 0;
+    }
+
+    .message-input::placeholder {
+      color: #5a6d8f;
+    }
+
+    .message-input:focus {
+      background: #0b1220;
+      border-color: #667eea;
+      color: #dce7ff;
+      box-shadow: 0 0 10px rgba(102, 126, 234, 0.3);
+    }
+
+    .stat-box {
+      background: #141d2d;
+      border: 1px solid #2b3650;
+      border-radius: 8px;
+      padding: 15px;
+      margin: 10px 0;
+      text-align: center;
+    }
+
+    .stat-value {
+      font-size: 24px;
+      font-weight: bold;
+      color: #667eea;
+    }
+
+    .stat-label {
+      font-size: 12px;
+      color: #8a9fb5;
+      margin-top: 5px;
+    }
+
+    .plane-info {
+      background: #141d2d;
+      border-left: 3px solid #667eea;
+      padding: 12px 15px;
+      border-radius: 4px;
+      margin: 8px 0;
+      font-size: 13px;
+    }
+
+    .btn-custom {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border: none;
+      color: white;
+      padding: 10px 24px;
+      border-radius: 8px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .btn-custom:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+      color: white;
+      text-decoration: none;
+    }
+
+    .btn-custom:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .visualization-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      margin: 30px 0;
+    }
+
+    .card-custom {
+      background: #141d2d;
+      border: 1px solid #2b3650;
+      border-radius: 12px;
+      padding: 20px;
+    }
+
+    .legend {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin: 20px 0;
+      padding: 15px;
+      background: #0b1220;
+      border-radius: 8px;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+    }
+
+    .legend-color {
+      width: 24px;
+      height: 24px;
+      border-radius: 4px;
+      border: 1px solid #2b3650;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">Steganography Project</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="history.html">History</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="techniquesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Techniques</a>
+            <ul class="dropdown-menu" aria-labelledby="techniquesDropdown">
+              <li><a class="dropdown-item" href="lsb.html">LSB Method</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="simulation.html">Simulation</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="simulation-hero">
+    <div class="container text-center">
+      <h1 class="display-3 fw-bold mb-3">Multi-bit Plane LSB Simulation</h1>
+      <p class="lead">Interactive visualization of multi-bit plane steganography embedding</p>
+    </div>
+  </section>
+
+  <!-- Simulation Content -->
+  <section class="simulation-container">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-10 mx-auto">
+
+          <!-- Information Section -->
+          <div class="info-box">
+            <h5><i class="fas fa-info-circle"></i> How Multi-bit Plane LSB Works</h5>
+            <p class="mb-0">This technique embeds secret data across multiple bit planes instead of just the least significant bit. The algorithm sequentially fills complete bit planes, maximizing data capacity while maintaining imperceptibility.</p>
+          </div>
+
+          <!-- Control Panel -->
+          <div class="control-panel">
+            <h5 class="mb-3"><i class="fas fa-sliders-h"></i> Simulation Controls</h5>
+            
+            <div class="row">
+              <div class="col-md-6">
+                <label class="form-label">Secret Message</label>
+                <input type="text" id="secretMessage" class="form-control message-input" placeholder="Enter secret message..." maxlength="20" value="HIDE">
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Number of Bit Planes</label>
+                <div class="d-flex gap-2 align-items-center">
+                  <input type="range" id="bitPlanes" class="form-range" min="1" max="8" value="3" style="flex: 1;">
+                  <span id="bitPlanesValue" style="min-width: 40px; text-align: center;">3</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="row mt-3">
+              <div class="col-md-6">
+                <label class="form-label">Simulation Speed</label>
+                <div class="d-flex gap-2 align-items-center">
+                  <input type="range" id="speed" class="form-range" min="200" max="1000" value="500" step="100">
+                  <span id="speedValue" style="min-width: 50px; text-align: center;">Normal</span>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label" style="visibility: hidden;">Action</label>
+                <div class="d-flex gap-2">
+                  <button class="btn-custom flex-grow-1" id="runSimulation">
+                    <i class="fas fa-play"></i> Run Simulation
+                  </button>
+                  <button class="btn-custom flex-grow-1" id="resetSimulation">
+                    <i class="fas fa-redo"></i> Reset
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Statistics -->
+          <div class="row mb-4">
+            <div class="col-md-3 col-sm-6">
+              <div class="stat-box">
+                <div class="stat-value" id="messageLength">4</div>
+                <div class="stat-label">Message Length (chars)</div>
+              </div>
+            </div>
+            <div class="col-md-3 col-sm-6">
+              <div class="stat-box">
+                <div class="stat-value" id="totalBits">32</div>
+                <div class="stat-label">Total Bits to Hide</div>
+              </div>
+            </div>
+            <div class="col-md-3 col-sm-6">
+              <div class="stat-box">
+                <div class="stat-value" id="pixelsNeeded">5</div>
+                <div class="stat-label">Pixels Required</div>
+              </div>
+            </div>
+            <div class="col-md-3 col-sm-6">
+              <div class="stat-box">
+                <div class="stat-value" id="capacity">75%</div>
+                <div class="stat-label">Bit Plane Capacity</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step Indicator -->
+          <div class="step-indicator" id="stepIndicator"></div>
+
+          <!-- Visualization -->
+          <h5 class="mt-4 mb-3"><i class="fas fa-cube"></i> Pixel Bit Planes Visualization</h5>
+          <p class="text-muted">Each pixel shows 8 bit planes (MSB to LSB). Click "Run Simulation" to see the embedding process.</p>
+
+          <div class="visualization-grid" id="pixelVisualization"></div>
+
+          <!-- Legend -->
+          <div class="legend">
+            <div class="legend-item">
+              <div class="legend-color" style="background: #1e3a5f;"></div>
+              <span>Original Bit (0)</span>
+            </div>
+            <div class="legend-item">
+              <div class="legend-color" style="background: #5f1e2e;"></div>
+              <span>Original Bit (1)</span>
+            </div>
+            <div class="legend-item">
+              <div class="legend-color" style="background: #667eea;"></div>
+              <span>Modified/Active Bit Plane</span>
+            </div>
+            <div class="legend-item">
+              <div class="legend-color" style="background: #28a745;"></div>
+              <span>Highlighted Bit</span>
+            </div>
+          </div>
+
+          <!-- Detailed Info -->
+          <div class="row mt-5">
+            <div class="col-lg-6">
+              <h5 class="mb-3"><i class="fas fa-book"></i> Encoding Process</h5>
+              <div class="plane-info">
+                <strong>Step 1:</strong> Convert message to binary
+              </div>
+              <div class="plane-info">
+                <strong>Step 2:</strong> Fill Bit Plane 7 (MSB-1) first
+              </div>
+              <div class="plane-info">
+                <strong>Step 3:</strong> Continue with subsequent planes
+              </div>
+              <div class="plane-info">
+                <strong>Step 4:</strong> Add delimiter when message ends
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <h5 class="mb-3"><i class="fas fa-calculator"></i> Capacity Example</h5>
+              <div class="plane-info">
+                <strong>1 Bit Plane:</strong> 1 bit per pixel
+              </div>
+              <div class="plane-info">
+                <strong>2 Bit Planes:</strong> 2 bits per pixel
+              </div>
+              <div class="plane-info">
+                <strong>3 Bit Planes:</strong> 3 bits per pixel
+              </div>
+              <div class="plane-info">
+                <strong>For 256x256 image:</strong> Up to 196,608 bits capacity
+              </div>
+            </div>
+          </div>
+
+          <!-- Details Section -->
+          <div class="mt-5">
+            <h5 class="mb-3"><i class="fas fa-lightbulb"></i> Key Advantages</h5>
+            <div class="row">
+              <div class="col-md-6">
+                <ul class="list-unstyled">
+                  <li><i class="fas fa-check text-success me-2"></i>Higher capacity than single-bit LSB</li>
+                  <li><i class="fas fa-check text-success me-2"></i>Sequential plane filling for optimization</li>
+                  <li><i class="fas fa-check text-success me-2"></i>Better distribution of embedding</li>
+                </ul>
+              </div>
+              <div class="col-md-6">
+                <ul class="list-unstyled">
+                  <li><i class="fas fa-check text-success me-2"></i>Flexible bit plane selection</li>
+                  <li><i class="fas fa-check text-success me-2"></i>Scalable for different image sizes</li>
+                  <li><i class="fas fa-check text-success me-2"></i>Easy to implement and visualize</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Back Button -->
+          <div class="text-center mt-5">
+            <a href="lsb.html" class="btn-custom">
+              <i class="fas fa-arrow-left"></i> Back to LSB Guide
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+          <p>Anubrata Kundu | Ayan Dasgupta | Priyanshi Saha | Soham Sarkar</p>
+          <div class="mt-3">
+            <a href="https://github.com/AD9190/Steganography"><i class="fab fa-github mx-2"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    class BitPlaneSimulation {
+      constructor() {
+        this.pixels = Array(8).fill(0).map(() => Math.floor(Math.random() * 256));
+        this.bitPlanes = 3;
+        this.speed = 500;
+        this.isRunning = false;
+        
+        this.setupEventListeners();
+        this.renderPixels();
+        this.updateStats();
+      }
+
+      setupEventListeners() {
+        document.getElementById('bitPlanes').addEventListener('change', (e) => {
+          this.bitPlanes = parseInt(e.target.value);
+          document.getElementById('bitPlanesValue').textContent = this.bitPlanes;
+          this.updateStats();
+        });
+
+        document.getElementById('speed').addEventListener('change', (e) => {
+          const speedValue = parseInt(e.target.value);
+          this.speed = speedValue;
+          const speedLabels = { 200: 'Fast', 500: 'Normal', 1000: 'Slow' };
+          document.getElementById('speedValue').textContent = speedLabels[speedValue] || 'Normal';
+        });
+
+        document.getElementById('secretMessage').addEventListener('input', () => {
+          this.updateStats();
+        });
+
+        document.getElementById('runSimulation').addEventListener('click', () => {
+          if (!this.isRunning) {
+            this.runSimulation();
+          }
+        });
+
+        document.getElementById('resetSimulation').addEventListener('click', () => {
+          this.reset();
+        });
+      }
+
+      updateStats() {
+        const message = document.getElementById('secretMessage').value;
+        const messageLength = message.length;
+        const totalBits = messageLength * 8;
+        const pixelsNeeded = Math.ceil(totalBits / this.bitPlanes);
+        const capacity = ((this.bitPlanes * 8) / 8) * 100 / 100;
+
+        document.getElementById('messageLength').textContent = messageLength;
+        document.getElementById('totalBits').textContent = totalBits;
+        document.getElementById('pixelsNeeded').textContent = pixelsNeeded;
+        document.getElementById('capacity').textContent = this.bitPlanes + '/8 planes';
+      }
+
+      renderPixels() {
+        const container = document.getElementById('pixelVisualization');
+        container.innerHTML = '';
+
+        this.pixels.forEach((pixelValue, pixelIdx) => {
+          const box = document.createElement('div');
+          box.className = 'card-custom';
+          box.id = `pixel-${pixelIdx}`;
+
+          let html = `<div class="pixel-decimal">Pixel ${pixelIdx + 1}: ${pixelValue}</div>`;
+          html += `<div class="text-muted" style="font-size: 12px; margin-bottom: 8px;">Dec: ${pixelValue}</div>`;
+
+          const binary = pixelValue.toString(2).padStart(8, '0');
+          html += '<div class="bit-plane">';
+          for (let i = 0; i < 8; i++) {
+            const bit = binary[i];
+            const planeNum = 7 - i;
+            const isActivePlane = planeNum < this.bitPlanes;
+            const highlightClass = isActivePlane ? 'highlight-plane' : '';
+            html += `<div class="bit bit-${bit} ${highlightClass}" data-bit="${i}" data-plane="${planeNum}">
+              ${bit}
+            </div>`;
+          }
+          html += '</div>';
+
+          html += '<div class="text-muted" style="font-size: 11px; margin-top: 8px;">Bit Plane 7 → 0 (MSB → LSB)</div>';
+
+          box.innerHTML = html;
+          container.appendChild(box);
+        });
+      }
+
+      createStepIndicator() {
+        const message = document.getElementById('secretMessage').value;
+        const steps = [];
+        
+        for (let i = 0; i < Math.min(message.length, 5); i++) {
+          steps.push(`Bit ${i * 8}-${(i + 1) * 8 - 1}`);
+        }
+        
+        if (message.length > 5) {
+          steps.push('...');
+        }
+
+        const indicator = document.getElementById('stepIndicator');
+        indicator.innerHTML = steps.map((step, idx) => 
+          `<div class="step" id="step-${idx}">${step}</div>`
+        ).join('');
+      }
+
+      async runSimulation() {
+        this.isRunning = true;
+        document.getElementById('runSimulation').disabled = true;
+
+        const message = document.getElementById('secretMessage').value;
+        if (!message) {
+          alert('Please enter a secret message');
+          this.isRunning = false;
+          document.getElementById('runSimulation').disabled = false;
+          return;
+        }
+
+        this.createStepIndicator();
+
+        // Convert message to binary
+        let messageBinary = '';
+        for (let char of message) {
+          messageBinary += char.charCodeAt(0).toString(2).padStart(8, '0');
+        }
+
+        let bitIndex = 0;
+        const totalBits = messageBinary.length;
+
+        // Embed bits into pixels
+        for (let planeNum = 7; planeNum >= 7 - this.bitPlanes + 1 && bitIndex < totalBits; planeNum--) {
+          // Update step indicator
+          const stepNum = Math.floor(bitIndex / 8);
+          const steps = document.querySelectorAll('.step');
+          steps.forEach((step, idx) => {
+            step.classList.remove('active');
+            if (idx === stepNum) step.classList.add('active');
+          });
+
+          for (let pixelIdx = 0; pixelIdx < this.pixels.length && bitIndex < totalBits; pixelIdx++) {
+            const bit = messageBinary[bitIndex];
+            const bitPos = 7 - planeNum;
+
+            // Highlight and modify the bit
+            const bitElement = document.querySelector(`#pixel-${pixelIdx} [data-bit="${bitPos}"]`);
+            if (bitElement) {
+              bitElement.classList.add('modified', 'highlight');
+              
+              await new Promise(resolve => setTimeout(resolve, this.speed));
+              
+              bitElement.classList.remove('highlight');
+            }
+
+            bitIndex++;
+          }
+        }
+
+        document.getElementById('runSimulation').disabled = false;
+        this.isRunning = false;
+
+        // Show completion message
+        const completionDiv = document.createElement('div');
+        completionDiv.className = 'alert alert-success alert-dismissible fade show mt-4';
+        completionDiv.innerHTML = `
+          <strong><i class="fas fa-check-circle"></i> Simulation Complete!</strong>
+          <br>Successfully embedded ${message.length} character(s) using ${this.bitPlanes} bit plane(s)
+          <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        `;
+        document.getElementById('pixelVisualization').parentElement.insertBefore(completionDiv, document.getElementById('pixelVisualization'));
+      }
+
+      reset() {
+        this.isRunning = false;
+        this.pixels = Array(8).fill(0).map(() => Math.floor(Math.random() * 256));
+        this.renderPixels();
+        document.getElementById('stepIndicator').innerHTML = '';
+        
+        // Remove any alerts
+        document.querySelectorAll('.alert').forEach(alert => alert.remove());
+        document.getElementById('runSimulation').disabled = false;
+      }
+    }
+
+    // Initialize simulation
+    document.addEventListener('DOMContentLoaded', () => {
+      new BitPlaneSimulation();
+    });
+  </script>
+</body>
+</html>

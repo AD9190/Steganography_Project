@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="History of Steganography and LSB Steganography">
+  <title>History of Steganography - From Ancient Times to Modern Era</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="styles.css" rel="stylesheet">
+  <style>
+    .history-hero {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 120px 0 80px;
+      margin-top: 70px;
+    }
+
+    .content-section {
+      padding: 60px 0;
+      color: #dde6f8;
+    }
+
+    .timeline {
+      position: relative;
+      padding: 20px 0;
+      max-width: 100%;
+    }
+
+    .history-page .timeline {
+      border-left: none;
+      margin: 0;
+      max-width: none;
+      padding-left: 0;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 2px;
+      top: 0;
+      bottom: 0;
+      background: linear-gradient(to bottom, #667eea, #764ba2);
+      z-index: 1;
+    }
+
+    .timeline-item {
+      margin-bottom: 50px;
+      position: relative;
+      min-height: 80px;
+      width: 100%;
+    }
+
+    .history-page .timeline-item {
+      opacity: 1;
+      transform: none;
+      box-shadow: none;
+    }
+
+    .timeline-item:nth-child(odd) .timeline-content {
+      margin-left: 0;
+      margin-right: auto;
+      width: calc(50% - 40px);
+      text-align: right;
+    }
+
+    .timeline-item:nth-child(even) .timeline-content {
+      margin-left: auto;
+      margin-right: 0;
+      width: calc(50% - 40px);
+      text-align: left;
+    }
+
+    .timeline-dot {
+      position: absolute;
+      left: 50%;
+      top: 30px;
+      transform: translateX(-50%);
+      width: 20px;
+      height: 20px;
+      background: #667eea;
+      border: 4px solid #0b1220;
+      border-radius: 50%;
+      z-index: 10;
+      box-shadow: 0 0 20px rgba(102, 126, 234, 0.5);
+    }
+
+    .timeline-content {
+      background: #141d2d;
+      border: 1px solid #2b3650;
+      border-radius: 10px;
+      padding: 25px;
+      transition: all 0.3s ease;
+      position: relative;
+      z-index: 5;
+      display: block;
+    }
+
+    .timeline-content:hover {
+      border-color: #667eea;
+      box-shadow: 0 0 20px rgba(102, 126, 234, 0.3);
+    }
+
+    .timeline-year {
+      font-size: 24px;
+      font-weight: bold;
+      color: #667eea;
+      margin-bottom: 10px;
+    }
+
+    .timeline-title {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 10px;
+      color: white;
+    }
+
+    .timeline-description {
+      color: #a0b0d0;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .milestone-card {
+      background: rgba(102, 126, 234, 0.1);
+      border-left: 4px solid #667eea;
+      border: 1px solid #2b3650;
+      padding: 20px;
+      margin: 20px 0;
+      border-radius: 8px;
+    }
+
+    .milestone-card h5 {
+      color: #667eea;
+      margin-bottom: 10px;
+    }
+
+    .era-section {
+      background: #141d2d;
+      border: 1px solid #2b3650;
+      border-radius: 10px;
+      padding: 30px;
+      margin: 30px 0;
+    }
+
+    .era-title {
+      color: #667eea;
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 20px;
+      border-bottom: 2px solid #667eea;
+      padding-bottom: 15px;
+    }
+
+    .key-points {
+      list-style: none;
+      padding: 0;
+    }
+
+    .key-points li {
+      padding: 10px 0;
+      padding-left: 30px;
+      position: relative;
+      color: #a0b0d0;
+    }
+
+    .key-points li:before {
+      content: "→";
+      position: absolute;
+      left: 0;
+      color: #667eea;
+      font-weight: bold;
+    }
+
+    .comparison-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+    }
+
+    .comparison-table th,
+    .comparison-table td {
+      padding: 15px;
+      text-align: left;
+      border: 1px solid #2b3650;
+    }
+
+    .comparison-table th {
+      background: #0b1220;
+      color: #667eea;
+      font-weight: 600;
+    }
+
+    .comparison-table td {
+      background: #141d2d;
+      color: #a0b0d0;
+    }
+
+    .comparison-table tr:hover td {
+      background: rgba(102, 126, 234, 0.1);
+    }
+
+    .icon-box {
+      text-align: center;
+      padding: 20px;
+      background: #141d2d;
+      border: 1px solid #2b3650;
+      border-radius: 10px;
+      margin: 15px 0;
+      transition: all 0.3s ease;
+    }
+
+    .icon-box:hover {
+      border-color: #667eea;
+      box-shadow: 0 0 20px rgba(102, 126, 234, 0.2);
+    }
+
+    .icon-box i {
+      font-size: 36px;
+      color: #667eea;
+      margin-bottom: 10px;
+    }
+
+    .icon-box h5 {
+      color: white;
+      font-size: 16px;
+      margin-top: 10px;
+    }
+
+    .icon-box p {
+      color: #8a9fb5;
+      font-size: 13px;
+      margin: 8px 0 0 0;
+    }
+
+    .highlight-box {
+      background: linear-gradient(135deg, rgba(102, 126, 234, 0.2) 0%, rgba(118, 75, 162, 0.2) 100%);
+      border: 1px solid #667eea;
+      padding: 20px;
+      border-radius: 8px;
+      margin: 20px 0;
+    }
+
+    @media (max-width: 768px) {
+      .timeline::before {
+        left: 20px;
+      }
+
+      .timeline-item:nth-child(odd) .timeline-content,
+      .timeline-item:nth-child(even) .timeline-content {
+        width: calc(100% - 60px);
+        margin-left: 50px !important;
+        margin-right: 0 !important;
+        text-align: left !important;
+      }
+
+      .timeline-dot {
+        left: 20px;
+      }
+    }
+  </style>
+</head>
+<body class="history-page">
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">Steganography Project</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="history.html">History</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="techniquesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Techniques</a>
+            <ul class="dropdown-menu" aria-labelledby="techniquesDropdown">
+              <li><a class="dropdown-item" href="lsb.html">LSB Method</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="simulation.html">Simulation</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="history-hero">
+    <div class="container text-center">
+      <h1 class="display-3 fw-bold mb-4">History of Steganography</h1>
+      <p class="lead">From Ancient Times to the Digital Age</p>
+    </div>
+  </section>
+
+  <!-- Content Section -->
+  <section class="content-section">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-10 mx-auto">
+
+          <!-- Introduction -->
+          <div class="highlight-box">
+            <h4><i class="fas fa-scroll"></i> What is Steganography?</h4>
+            <p class="mb-0">Steganography is the art and science of hiding messages or information within other non-secret data or media. Unlike cryptography, which scrambles messages to make them unreadable, steganography conceals the very existence of the message itself. The term comes from the Greek words "steganos" (covered/hidden) and "graphia" (writing).</p>
+          </div>
+
+          <!-- Ancient Era -->
+          <div class="era-section">
+            <div class="era-title"><i class="fas fa-scroll"></i> Ancient Era (circa 500 BCE - 1000 CE)</div>
+            
+            <h5>Early Steganographic Methods</h5>
+            <p>The history of steganography dates back thousands of years to ancient civilizations where people needed to hide sensitive information from enemies and competitors.</p>
+
+            <div class="timeline" style="position: relative; padding: 0;">
+              <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                  <div class="timeline-year">500 BCE</div>
+                  <div class="timeline-title">Ancient Greece - Histiaeus</div>
+                  <div class="timeline-description">Histiaeus, a ruler of Miletus, used steganography to send secret messages during the Ionian Revolt. He would shave the head of a trusted slave, write a message on the scalp, wait for the hair to grow back, and send the slave as a messenger. The recipient would shave the slave's head again to read the message.</div>
+                </div>
+              </div>
+
+              <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                  <div class="timeline-year">1 CE</div>
+                  <div class="timeline-title">Roman Empire - Aeneas Tacticus</div>
+                  <div class="timeline-description">Aeneas Tacticus documented the use of steganography in military communications. He described methods including using wax tablets and hollow wooden pipes to conceal messages during sieges.</div>
+                </div>
+              </div>
+
+              <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                  <div class="timeline-year">100 CE</div>
+                  <div class="timeline-title">Pliny the Elder</div>
+                  <div class="timeline-description">The Roman naturalist Pliny recorded several steganographic techniques including invisible inks, hollow objects, and messages written on egg shells. He documented methods used for covert communication among the Roman elite.</div>
+                </div>
+              </div>
+
+              <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                  <div class="timeline-year">200-800 CE</div>
+                  <div class="timeline-title">Middle Ages - Ink-Based Methods</div>
+                  <div class="timeline-description">During the medieval period, alchemists developed various invisible ink recipes using organic compounds like milk, lemon juice, urine, and plant extracts. These methods were widely used in diplomatic and military correspondence.</div>
+                </div>
+              </div>
+            </div>
+
+            <ul class="key-points mt-4">
+              <li><strong>Physical Steganography:</strong> Messages hidden on bodies, in objects, or using organic materials</li>
+              <li><strong>Ink-Based Methods:</strong> Invisible inks made from natural compounds</li>
+              <li><strong>Cultural Significance:</strong> Essential for military strategy and espionage</li>
+              <li><strong>Contrast with Cryptography:</strong> Focus on hiding the existence of messages, not scrambling them</li>
+            </ul>
+          </div>
+
+          <!-- Renaissance Era -->
+          <div class="era-section">
+            <div class="era-title"><i class="fas fa-book-open"></i> Renaissance Era (1400-1600 CE)</div>
+            
+            <h5>Formalization of Steganographic Theory</h5>
+            <p>During the Renaissance, scholars and scientists began to formally study and document steganographic techniques, laying the groundwork for modern steganography.</p>
+
+            <div class="row mt-4">
+              <div class="col-md-6">
+                <div class="milestone-card">
+                  <h5><i class="fas fa-feather"></i> Johannes Trithemius (1462-1516)</h5>
+                  <p>The German abbot and polymath wrote "Steganographia" (1606), the first printed book dedicated entirely to steganography. He described methods including acrostics, nulls (dummy words), and homophonic substitution. He literally coined the term "steganographia."</p>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="milestone-card">
+                  <h5><i class="fas fa-eye"></i> Giambattista della Porta (1535-1615)</h5>
+                  <p>The Italian scientist wrote "De Furtivis Literarum Notis" (On Secret Correspondence of Letters), which presented comprehensive steganographic and cryptographic methods. He explored using natural phenomena and biological carriers for message concealment.</p>
+                </div>
+              </div>
+            </div>
+
+            <ul class="key-points mt-4">
+              <li><strong>Academic Interest:</strong> Steganography became a formal field of study</li>
+              <li><strong>Text-Based Methods:</strong> Development of linguistic steganography techniques</li>
+              <li><strong>Theoretical Foundation:</strong> Early classifications and categorization of methods</li>
+              <li><strong>Documentation:</strong> Publication of comprehensive steganographic manuals</li>
+            </ul>
+          </div>
+
+          <!-- Modern Era - Pre-Digital -->
+          <div class="era-section">
+            <div class="era-title"><i class="fas fa-flask"></i> Industrial & Pre-Digital Era (1800-1950)</div>
+            
+            <h5>Scientific Approaches to Steganography</h5>
+
+            <div class="row mt-4">
+              <div class="col-md-6">
+                <div class="icon-box">
+                  <i class="fas fa-microscope"></i>
+                  <h5>Microdots</h5>
+                  <p>During WWII, intelligence agencies developed microphotography techniques to reduce entire documents to dot sizes invisible to the naked eye. These were concealed in regular correspondence.</p>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="icon-box">
+                  <i class="fas fa-music"></i>
+                  <h5>Acoustic Methods</h5>
+                  <p>Messages were hidden in musical compositions using specific note patterns and frequencies, creating a form of audio steganography during the WWI and WWII periods.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="icon-box">
+                  <i class="fas fa-image"></i>
+                  <h5>Photograph Manipulation</h5>
+                  <p>Spy agencies developed techniques to hide data in photographic negatives, exploiting grain structure and light variations to conceal information.</p>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="icon-box">
+                  <i class="fas fa-radio"></i>
+                  <h5>Radio & Signal Techniques</h5>
+                  <p>During WWII, spread spectrum and frequency hopping techniques were developed to hide communications from enemy detection and interception.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Digital Era -->
+          <div class="era-section">
+            <div class="era-title"><i class="fas fa-computer"></i> Digital Era (1970s - Present)</div>
+            
+            <h5>Steganography in the Computer Age</h5>
+            <p>The advent of digital computing revolutionized steganography, enabling new techniques and applications that were impossible before.</p>
+
+            <div class="timeline" style="position: relative; padding: 0; margin-top: 30px;">
+              <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                  <div class="timeline-year">1970s</div>
+                  <div class="timeline-title">Early Digital Methods</div>
+                  <div class="timeline-description">Researchers began exploring ways to hide data in digital signals, including video and audio. Initial work focused on theoretical approaches to embedding information in noisy channels.</div>
+                </div>
+              </div>
+
+              <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                  <div class="timeline-year">1980s</div>
+                  <div class="timeline-title">Image Steganography Development</div>
+                  <div class="timeline-description">Researchers developed methods to hide data in digital images. The foundation for LSB (Least Significant Bit) steganography was established during this period, though not yet formally named.</div>
+                </div>
+              </div>
+
+              <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                  <div class="timeline-year">1990s</div>
+                  <div class="timeline-title">Rise of Digital Watermarking</div>
+                  <div class="timeline-description">As digital media became prevalent, watermarking techniques emerged for copyright protection. LSB steganography gained attention as a robust method for hiding metadata and ownership information in digital content.</div>
+                </div>
+              </div>
+
+              <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                  <div class="timeline-year">1998</div>
+                  <div class="timeline-title">LSB Steganography Formalized</div>
+                  <div class="timeline-description">Researchers formally documented and analyzed LSB steganography, its capacity, detection methods, and security implications. Several papers were published establishing LSB as a well-studied technique in academic literature.</div>
+                </div>
+              </div>
+
+              <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                  <div class="timeline-year">2000s</div>
+                  <div class="timeline-title">Steganalysis & Detection</div>
+                  <div class="timeline-description">With increasing use of steganography, researchers developed sophisticated detection methods. Statistical analysis, machine learning, and steganalysis became active research areas. LSB robustness was challenged by various attacks.</div>
+                </div>
+              </div>
+
+              <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                  <div class="timeline-year">2010s-Present</div>
+                  <div class="timeline-title">Advanced Techniques & AI</div>
+                  <div class="timeline-description">Modern steganography incorporates advanced techniques using machine learning, deep learning, and neural networks. LSB remains popular while improved variants (multi-bit LSB, adaptive LSB) were developed. Steganography is now deeply integrated into digital forensics, authentication, and security.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- LSB Steganography History -->
+          <div class="era-section mt-5">
+            <div class="era-title"><i class="fas fa-layer-group"></i> LSB Steganography History</div>
+            
+            <h5>The Evolution of Least Significant Bit Steganography</h5>
+            <p>LSB steganography represents one of the most elegant and widely-used digital steganographic techniques. Its simplicity and effectiveness made it a fundamental building block in the field.</p>
+
+            <div class="row mt-4">
+              <div class="col-lg-6">
+                <h5 class="mt-4"><i class="fas fa-bolt"></i> Why LSB?</h5>
+                <ul class="key-points">
+                  <li><strong>Simplicity:</strong> Easy to understand and implement conceptually</li>
+                  <li><strong>High Capacity:</strong> Can hide multiple bits per pixel</li>
+                  <li><strong>Imperceptibility:</strong> Changes to LSB are invisible to human eyes</li>
+                  <li><strong>Computational Efficiency:</strong> Minimal processing overhead</li>
+                  <li><strong>Flexibility:</strong> Works with various image formats (BMP, PNG, TIFF)</li>
+                  <li><strong>Scalability:</strong> Can be adapted for different pixel depths</li>
+                </ul>
+              </div>
+              <div class="col-lg-6">
+                <h5 class="mt-4"><i class="fas fa-lock-open"></i> LSB Vulnerabilities</h5>
+                <ul class="key-points">
+                  <li><strong>Statistical Detection:</strong> Creates detectable patterns in histograms</li>
+                  <li><strong>Chi-Square Attack:</strong> Measures statistical anomalies</li>
+                  <li><strong>Lossy Compression:</strong> Destroyed by JPEG and similar compression</li>
+                  <li><strong>Machine Learning:</strong> Can be detected using trained models</li>
+                  <li><strong>Steganalysis:</strong> Sophisticated analysis tools can reveal hiding</li>
+                  <li><strong>Visual Attacks:</strong> Histogram analysis reveals embedding patterns</li>
+                </ul>
+              </div>
+            </div>
+
+            <h5 class="mt-5"><i class="fas fa-cube"></i> Evolution of LSB Variants</h5>
+            <table class="comparison-table mt-4">
+              <thead>
+                <tr>
+                  <th>LSB Variant</th>
+                  <th>Period Developed</th>
+                  <th>Key Improvement</th>
+                  <th>Capacity</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Single-bit LSB</td>
+                  <td>Early 1990s</td>
+                  <td>Foundation method - 1 bit per pixel</td>
+                  <td>Low</td>
+                </tr>
+                <tr>
+                  <td>Multi-bit LSB</td>
+                  <td>Mid 1990s</td>
+                  <td>Multiple bits per pixel (2-4 bits)</td>
+                  <td>Medium-High</td>
+                </tr>
+                <tr>
+                  <td>Adaptive LSB</td>
+                  <td>Late 1990s</td>
+                  <td>Embedding based on pixel characteristics</td>
+                  <td>High</td>
+                </tr>
+                <tr>
+                  <td>Random LSB</td>
+                  <td>2000s</td>
+                  <td>Pseudo-random selection of bits</td>
+                  <td>Low-Medium</td>
+                </tr>
+                <tr>
+                  <td>LSB Matching</td>
+                  <td>2000s</td>
+                  <td>Probabilistic matching to reduce artifacts</td>
+                  <td>Medium</td>
+                </tr>
+                <tr>
+                  <td>Multi-plane LSB</td>
+                  <td>2010s</td>
+                  <td>Sequential plane filling with optimization</td>
+                  <td>Very High</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Applications Timeline -->
+          <div class="era-section mt-5">
+            <div class="era-title"><i class="fas fa-cube"></i> Real-World Applications of Steganography</div>
+            
+            <div class="row mt-4">
+              <div class="col-md-6">
+                <div class="milestone-card">
+                  <h5><i class="fas fa-shield-alt"></i> Digital Rights Management</h5>
+                  <p>Steganography is used to embed watermarks in digital media to prove ownership and protect copyright. Publishers and content creators use it to track unauthorized distribution.</p>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="milestone-card">
+                  <h5><i class="fas fa-lock"></i> Covert Communication</h5>
+                  <p>Intelligence and military agencies use steganography to send classified information securely. It provides an additional layer of security beyond encryption.</p>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="milestone-card">
+                  <h5><i class="fas fa-hospital"></i> Medical Imaging</h5>
+                  <p>Patient data, metadata, and diagnostic information are embedded in medical images for secure transmission and storage while maintaining image integrity.</p>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="milestone-card">
+                  <h5><i class="fas fa-certificate"></i> Authentication</h5>
+                  <p>Steganographic techniques are used to embed authentication codes and verify digital signatures in documents and media files.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Modern Challenges -->
+          <div class="era-section mt-5">
+            <div class="era-title"><i class="fas fa-exclamation-triangle"></i> Modern Challenges & Future Directions</div>
+            
+            <h5>Contemporary Issues</h5>
+            <ul class="key-points">
+              <li><strong>Steganalysis:</strong> Increasingly sophisticated detection methods make steganography less secure</li>
+              <li><strong>Machine Learning Attacks:</strong> AI-based steganalysis can detect even subtle embedding patterns</li>
+              <li><strong>Image Processing:</strong> Compression and filtering can destroy hidden messages</li>
+              <li><strong>Standardization:</strong> Lack of universal standards makes implementation inconsistent</li>
+              <li><strong>Ethical Concerns:</strong> Steganography can be misused for illicit activities and law evasion</li>
+            </ul>
+
+            <h5 class="mt-4">Future Directions</h5>
+            <ul class="key-points">
+              <li><strong>Robust Steganography:</strong> Methods resistant to image processing and compression attacks</li>
+              <li><strong>Deep Learning Integration:</strong> Using neural networks for better capacity and imperceptibility</li>
+              <li><strong>Hybrid Systems:</strong> Combining steganography with cryptography for enhanced security</li>
+              <li><strong>Biological Steganography:</strong> Embedding data in DNA and biological molecules</li>
+              <li><strong>Blockchain Integration:</strong> Using distributed ledgers for authentication and verification</li>
+            </ul>
+          </div>
+
+          <!-- Conclusion -->
+          <div class="highlight-box mt-5">
+            <h4><i class="fas fa-graduation-cap"></i> Conclusion</h4>
+            <p class="mb-0">From ancient slave head messages to modern multi-bit plane LSB steganography, the field has evolved dramatically. Today, steganography remains a critical tool in digital security, copyright protection, and covert communication. LSB steganography, despite its vulnerabilities, continues to be widely studied and improved. As technology advances, so does both the sophistication of steganographic methods and the techniques to detect them. The balance between creating undetectable messages and developing detection methods will continue to drive innovation in this fascinating field.</p>
+          </div>
+
+          <!-- Navigation -->
+          <div class="text-center mt-5">
+            <a href="lsb.html" class="btn btn-primary btn-lg me-3">
+              <i class="fas fa-layer-group"></i> LSB Technique
+            </a>
+            <a href="simulation.html" class="btn btn-primary btn-lg me-3">
+              <i class="fas fa-microscope"></i> Interactive Simulation
+            </a>
+            <a href="index.html" class="btn btn-outline-secondary btn-lg">
+              <i class="fas fa-home"></i> Home
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+          <p>Anubrata Kundu | Ayan Dasgupta | Priyanshi Saha | Soham Sarkar</p>
+          <div class="mt-3">
+            <a href="https://github.com/AD9190/Steganography"><i class="fab fa-github mx-2"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
