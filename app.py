@@ -191,11 +191,11 @@ from flask import redirect
 
 @app.route("/")
 def index():
-    return redirect("https://ad9190.github.io/Steganography_Final/")
+    return redirect("https://ad9190.github.io/Steganography_Project/")
 
 @app.route("/lsb")
 def lsb():
-    return redirect("https://ad9190.github.io/Steganography_Final/lsb.html")
+    return redirect("https://ad9190.github.io/Steganography_Project/lsb.html")
 
 @app.route("/health")
 def health():
