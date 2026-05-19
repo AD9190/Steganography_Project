@@ -132,7 +132,7 @@ window.QA_INTENTS = {
             "Feature-based machine learning"
           ],
           "links": [
-            { "label": "Try Detection Model", "url": "http://127.0.0.1:5000/test" }
+            { "label": "Try Detection Model", "url": "https://steganography-project-l9qi.onrender.com/test" }
           ]
         }
       ]
