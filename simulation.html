@@ -416,10 +416,10 @@
                 <strong>Step 1:</strong> Convert message to binary
               </div>
               <div class="plane-info">
-                <strong>Step 2:</strong> Fill Bit Plane 7 (MSB-1) first
+                <strong>Step 2:</strong> Fill Least Significant Bit Plane (LSB) first
               </div>
               <div class="plane-info">
-                <strong>Step 3:</strong> Continue with subsequent planes
+                <strong>Step 3:</strong> Move from LSB to higher bit planes if needed
               </div>
               <div class="plane-info">
                 <strong>Step 4:</strong> Add delimiter when message ends
@@ -619,7 +619,7 @@
         const totalBits = messageBinary.length;
 
         // Embed bits into pixels
-        for (let planeNum = 7; planeNum >= 7 - this.bitPlanes + 1 && bitIndex < totalBits; planeNum--) {
+        for (let planeNum = 0; planeNum < this.bitPlanes && bitIndex < totalBits; planeNum++) {
           // Update step indicator
           const stepNum = Math.floor(bitIndex / 8);
           const steps = document.querySelectorAll('.step');
